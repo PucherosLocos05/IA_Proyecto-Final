@@ -1,48 +1,74 @@
-import tensorflow as tf
-from tensorflow.keras.preprocessing.text import Tokenizer
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+import nltk
+from nltk.stem import WordNetLemmatizer
+import json
+import pickle
 import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.optimizers import SGD
+import random
 
-# 1. Dataset simple de intenciones
-intents = [
-    {"tag": "saludo", "patterns": ["hola", "buenas", "buenos dias", "qué onda", "hola buenas"]},
-    {"tag": "despedida", "patterns": ["adios", "hasta luego", "nos vemos", "gracias, adios"]},
-    {"tag": "precio", "patterns": ["cuanto cuestan las donas", "precio de las donas", "precios", "cuanto vale una dona", "cuanto cuestan"]},
-    {"tag": "menu", "patterns": ["que sabores tienes", "menu de donas", "sabores de donas", "que venden", "quiero ver el menú"]},
-    {"tag": "horario", "patterns": ["cual es su horario", "a que hora abren", "a que hora cierran", "horarios", "cuando estan abiertos"]},
-    {"tag": "ubicacion", "patterns": ["donde estan", "cuál es su ubicacion", "direccion de la tienda", "en donde se encuentran"]}
-]
+lemmatizer = WordNetLemmatizer()
 
-# 2. Construir listas de frases (X) y etiquetas (y)
-frases = []
-etiquetas = []
-tags = []
+# Cargar el archivo JSON actualizado
+with open('intents_donas.json', 'r', encoding='utf-8') as f:
+    intents = json.load(f)
 
-for intent in intents:
-    tag = intent["tag"]
-    tags.append(tag)
-    for pattern in intent["patterns"]:
-        frases.append(pattern)
-        etiquetas.append(tag)
+words = []
+classes = []
+documents = []
+ignore_words = ['?', '!', '.', ',']
 
-# 3. Codificar etiquetas a números
-tags_unicos = sorted(list(set(tags)))
-tag_a_id = {tag: idx for idx, tag in enumerate(tags_unicos)}
-id_a_tag = {idx: tag for tag, idx in tag_a_id.items()}
+# Procesar los patrones del JSON
+for intent in intents['intents']:
+    for pattern in intent['patterns']:
+        w = nltk.word_tokenize(pattern)
+        words.extend(w)
+        documents.append((w, intent['tag']))
+        if intent['tag'] not in classes:
+            classes.append(intent['tag'])
 
-y = np.array([tag_a_id[e] for e in etiquetas])
+words = [lemmatizer.lemmatize(w.lower()) for w in words if w not in ignore_words]
+words = sorted(list(set(words)))
+classes = sorted(list(set(classes)))
 
-# 4. Tokenizar texto
-tokenizer = Tokenizer(oov_token="<OOV>")
-tokenizer.fit_on_texts(frases)
-sequences = tokenizer.texts_to_sequences(frases)
+# ESTO ES LO QUE TE FALTABA GENERAR: Exportar las listas a archivos .pkl
+pickle.dump(words, open('words.pkl', 'wb'))
+pickle.dump(classes, open('classes.pkl', 'wb'))
 
-maxlen = max(len(seq) for seq in sequences)
-X = pad_sequences(sequences, maxlen=maxlen, padding="post")
+training = []
+output_empty = [0] * len(classes)
 
-vocab_size = len(tokenizer.word_index) + 1  # +1 por OOV
+for doc in documents:
+    bag = []
+    pattern_words = doc[0]
+    pattern_words = [lemmatizer.lemmatize(word.lower()) for word in pattern_words]
+    for w in words:
+        bag.append(1) if w in pattern_words else bag.append(0)
+    
+    output_row = list(output_empty)
+    output_row[classes.index(doc[1])] = 1
+    training.append([bag, output_row])
 
-print("Frases de entrenamiento:", len(frases))
-print("Tamaño vocabulario:", vocab_size)
-print("Longitud máxima de secuencia:", maxlen)
-print("Clases:", tags_unicos)
+random.shuffle(training)
+training = np.array(training, dtype=object)
+
+train_x = list(training[:, 0])
+train_y = list(training[:, 1])
+
+# Crear el modelo de Red Neuronal
+model = Sequential()
+model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(len(train_y[0]), activation='softmax'))
+
+sgd = SGD(learning_rate=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
+
+# Entrenar y guardar el modelo h5
+model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
+model.save('chatbot_model.h5')
+print("\n¡Modelo entrenado con éxito y archivos pkl/h5 creados!")
