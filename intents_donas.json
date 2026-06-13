@@ -1,0 +1,60 @@
+intents = [
+    {
+        "tag": "saludo",
+        "patterns": [
+            "hola",
+            "buenas",
+            "buenos dias",
+            "qué onda",
+            "hola buenas"
+        ]
+    },
+    {
+        "tag": "despedida",
+        "patterns": [
+            "adios",
+            "hasta luego",
+            "nos vemos",
+            "gracias, adios"
+        ]
+    },
+    {
+        "tag": "precio",
+        "patterns": [
+            "cuanto cuestan las donas",
+            "precio de las donas",
+            "precios",
+            "cuanto vale una dona",
+            "cuanto cuestan"
+        ]
+    },
+    {
+        "tag": "menu",
+        "patterns": [
+            "que sabores tienes",
+            "menu de donas",
+            "sabores de donas",
+            "que venden",
+            "quiero ver el menú"
+        ]
+    },
+    {
+        "tag": "horario",
+        "patterns": [
+            "cual es su horario",
+            "a que hora abren",
+            "a que hora cierran",
+            "horarios",
+            "cuando estan abiertos"
+        ]
+    },
+    {
+        "tag": "ubicacion",
+        "patterns": [
+            "donde estan",
+            "cuál es su ubicacion",
+            "direccion de la tienda",
+            "en donde se encuentran"
+        ]
+    }
+]
