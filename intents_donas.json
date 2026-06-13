@@ -1,60 +1,34 @@
-intents = [
+{
+  "intents": [
     {
-        "tag": "saludo",
-        "patterns": [
-            "hola",
-            "buenas",
-            "buenos dias",
-            "qué onda",
-            "hola buenas"
-        ]
+      "tag": "saludo",
+      "patterns": ["hola", "buen dia", "buenas tardes", "que tal", "hey", "buenas"],
+      "responses": ["¡Hola! Bienvenido a Donas CETI 🍩 ¿En qué te puedo ayudar?", "¡Buenas! ¿Listo para ordenar unas ricas donas?"]
     },
     {
-        "tag": "despedida",
-        "patterns": [
-            "adios",
-            "hasta luego",
-            "nos vemos",
-            "gracias, adios"
-        ]
+      "tag": "despedida",
+      "patterns": ["adios", "nos vemos", "gracias por la ayuda", "bye", "hasta luego"],
+      "responses": ["¡De nada! Esperamos tu orden pronto. ¡Buen provecho! 🍩", "¡Hasta luego! Que tengas un excelente día."]
     },
     {
-        "tag": "precio",
-        "patterns": [
-            "cuanto cuestan las donas",
-            "precio de las donas",
-            "precios",
-            "cuanto vale una dona",
-            "cuanto cuestan"
-        ]
+      "tag": "menu",
+      "patterns": ["que donas tienen", "muestrame el menu", "que venden", "sabores", "especialidades"],
+      "responses": ["Tenemos donas de Chocolate, Glaseadas, Fresa, Maple y la especial Dona CETI. ¿Cuál quieres?"]
     },
     {
-        "tag": "menu",
-        "patterns": [
-            "que sabores tienes",
-            "menu de donas",
-            "sabores de donas",
-            "que venden",
-            "quiero ver el menú"
-        ]
+      "tag": "precio",
+      "patterns": ["cuanto cuesta", "precio", "valores", "en cuanto salen", "costo"],
+      "responses": ["Las donas sencillas están en $20 MXN y las especiales en $35 MXN."]
     },
     {
-        "tag": "horario",
-        "patterns": [
-            "cual es su horario",
-            "a que hora abren",
-            "a que hora cierran",
-            "horarios",
-            "cuando estan abiertos"
-        ]
+      "tag": "horario",
+      "patterns": ["a que hora abren", "estan abiertos", "horario", "que dias abren"],
+      "responses": ["Abrimos de Lunes a Sábado de 8:00 AM a 8:00 PM."]
     },
     {
-        "tag": "ubicacion",
-        "patterns": [
-            "donde estan",
-            "cuál es su ubicacion",
-            "direccion de la tienda",
-            "en donde se encuentran"
-        ]
+      "tag": "ubicacion",
+      "patterns": ["donde estan", "donde se ubican", "sucursales", "direccion"],
+      "responses": ["Estamos ubicados dentro del plantel del CETI, en el edificio principal."]
     }
-]
+  ]
+}
