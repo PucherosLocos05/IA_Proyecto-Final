@@ -19,4 +19,7 @@ precios
 horario
 ubicación
 despedida
+
+
+
 Luego el chatbot responde adecuadamente según el caso.

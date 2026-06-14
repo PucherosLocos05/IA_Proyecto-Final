@@ -30,7 +30,7 @@ def bolsa_palabras(texto, palabras):
                 bolsa[i] = 1
     return np.array(bolsa)
 
-# AQUÍ ESTÁ LA FUNCIÓN QUE FALTABA O TENÍA EL ERROR DE NOMBRE
+
 def predecir_intencion(texto):
     bolsa = bolsa_palabras(texto, words)
     res = model.predict(np.array([bolsa]), verbose=0)[0]
@@ -65,7 +65,7 @@ def iniciar_chat():
             print("Bot: ¡Adiós! Vuelve pronto por más donas. 🍩")
             break
         
-        # Llamada a la función corregida
+     
         tag, conf = predecir_intencion(msg)
         
         if conf > 0.5 and tag != "no_entendido":
