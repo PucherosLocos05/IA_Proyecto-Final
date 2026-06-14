@@ -2,32 +2,61 @@
   "intents": [
     {
       "tag": "saludo",
-      "patterns": ["hola", "buen dia", "buenas tardes", "que tal", "hey", "buenas"],
+      "patterns": [
+        "hola", "buen dia", "buenas tardes", "que tal", "hey", "buenas",
+        "holas", "buenos dias", "buenas noches", "quiubo", "que onda", 
+        "saludos", "habra alguien ahi", "hola hola", "ayuda por favor",
+        "alguien disponible", "buenas buenas"
+      ],
       "responses": ["¡Hola! Bienvenido a Donas CETI 🍩 ¿En qué te puedo ayudar?", "¡Buenas! ¿Listo para ordenar unas ricas donas?"]
     },
     {
       "tag": "despedida",
-      "patterns": ["adios", "nos vemos", "gracias por la ayuda", "bye", "hasta luego"],
+      "patterns": [
+        "adios", "nos vemos", "gracias por la ayuda", "bye", "hasta luego",
+        "chao", "hasta mañana", "ya me voy", "gracias adios", "muchas gracias por todo",
+        "al rato", "cuidate", "sale bye", "luego te hablo", "fin", "cerrar chat"
+      ],
       "responses": ["¡De nada! Esperamos tu orden pronto. ¡Buen provecho! 🍩", "¡Hasta luego! Que tengas un excelente día."]
     },
     {
       "tag": "menu",
-      "patterns": ["que donas tienen", "muestrame el menu", "que venden", "sabores", "especialidades"],
+      "patterns": [
+        "que donas tienen", "muestrame el menu", "que venden", "sabores", "especialidades",
+        "lista de donas", "que sabores hay", "tipos de donas", "carta", "catalogo",
+        "que opciones tienen", "tienen de chocolate", "cuales son las especiales", 
+        "que me recomiendas", "que variedad manejan", "quiero ver el menu", "que comida hay"
+      ],
       "responses": ["Tenemos donas de Chocolate, Glaseadas, Fresa, Maple y la especial Dona CETI. ¿Cuál quieres?"]
     },
     {
       "tag": "precio",
-      "patterns": ["cuanto cuesta", "precio", "valores", "en cuanto salen", "costo"],
+      "patterns": [
+        "cuanto cuesta", "precio", "valores", "en cuanto salen", "costo",
+        "cuanto es", "precios", "en cuanto estan", "que precio tienen", "es muy caro",
+        "cuanto dinero", "cotizacion", "cuanto sale cada una", "lista de precios",
+        "cuanto cuesta la dona ceti", "me das precios", "valor"
+      ],
       "responses": ["Las donas sencillas están en $20 MXN y las especiales en $35 MXN."]
     },
     {
       "tag": "horario",
-      "patterns": ["a que hora abren", "estan abiertos", "horario", "que dias abren"],
+      "patterns": [
+        "a que hora abren", "estan abiertos", "horario", "que dias abren",
+        "a que hora cierran", "cuando abren", "esta abierto ahorita", "a que hora atienden",
+        "horarios", "abren los domingos", "abren los sabados", "hasta que hora estan",
+        "puedo ir a comprar ahorita", "tiempo de servicio"
+      ],
       "responses": ["Abrimos de Lunes a Sábado de 8:00 AM a 8:00 PM."]
     },
     {
       "tag": "ubicacion",
-      "patterns": ["donde estan", "donde se ubican", "sucursales", "direccion"],
+      "patterns": [
+        "donde estan", "donde se ubican", "sucursales", "direccion",
+        "como llego", "donde los encuentro", "ubicacion", "donde estan establecidos",
+        "en que parte del ceti estan", "cual es su direccion", "mapa", "en que salon",
+        "donde venden las donas", "en que edificio"
+      ],
       "responses": ["Estamos ubicados dentro del plantel del CETI, en el edificio principal."]
     }
   ]
